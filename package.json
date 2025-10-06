@@ -1,0 +1,24 @@
+{
+  "name": "boom-stack-demo",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A demo app using the BOOM stack - Bun, Astro, MongoDB, HTMX, and Alpine.js",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/node": "^8.3.2",
+    "@astrojs/tailwind": "^5.1.0",
+    "astro": "^4.15.0",
+    "mongodb": "^6.8.0",
+    "tailwindcss": "^3.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0"
+  }
+}
+

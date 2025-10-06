@@ -1,0 +1,82 @@
+---
+// Component to showcase the BOOM stack technologies
+---
+
+<div class="bg-white rounded-lg shadow-md p-6 mb-8">
+  <h2 class="text-2xl font-semibold text-gray-800 mb-4">BOOM Stack Technologies</h2>
+  
+  <div 
+    x-data="{
+      activeTab: 'bun',
+      tabs: {
+        bun: {
+          name: 'Bun',
+          icon: '🥖',
+          description: 'Fast JavaScript runtime, bundler, and package manager',
+          features: ['Ultra-fast startup', 'Built-in bundler', 'Native TypeScript support', 'Drop-in Node.js replacement']
+        },
+        astro: {
+          name: 'Astro',
+          icon: '🚀',
+          description: 'Modern web framework for building fast, content-focused websites',
+          features: ['Zero JS by default', 'Component islands', 'Built-in SSG/SSR', 'Framework agnostic']
+        },
+        mongodb: {
+          name: 'MongoDB',
+          icon: '🍃',
+          description: 'Document-oriented NoSQL database',
+          features: ['Flexible schema', 'Powerful queries', 'Horizontal scaling', 'Rich data types']
+        },
+        htmx: {
+          name: 'HTMX',
+          icon: '⚡',
+          description: 'Access AJAX, Server-Sent Events, and WebSockets directly in HTML',
+          features: ['No JavaScript required', 'Progressive enhancement', 'Small payload', 'Easy to learn']
+        },
+        alpine: {
+          name: 'Alpine.js',
+          icon: '🏔️',
+          description: 'Lightweight framework for composing behavior in HTML',
+          features: ['Declarative', 'Reactive', 'Small footprint', 'Easy integration']
+        }
+      }
+    }"
+    class="space-y-4"
+  >
+    <!-- Tab Navigation -->
+    <div class="flex flex-wrap gap-2 mb-6">
+      <template x-for="(tab, key) in tabs" :key="key">
+        <button
+          @click="activeTab = key"
+          :class="activeTab === key ? 'bg-primary-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
+          class="px-4 py-2 rounded-md font-medium transition-colors"
+        >
+          <span x-text="tab.icon"></span>
+          <span x-text="tab.name" class="ml-2"></span>
+        </button>
+      </template>
+    </div>
+    
+    <!-- Tab Content -->
+    <template x-for="(tab, key) in tabs" :key="key">
+      <div x-show="activeTab === key" x-transition class="space-y-4">
+        <div class="flex items-center space-x-3">
+          <span x-text="tab.icon" class="text-3xl"></span>
+          <div>
+            <h3 x-text="tab.name" class="text-xl font-semibold text-gray-800"></h3>
+            <p x-text="tab.description" class="text-gray-600"></p>
+          </div>
+        </div>
+        
+        <ul class="grid grid-cols-1 md:grid-cols-2 gap-2">
+          <template x-for="feature in tab.features">
+            <li class="flex items-center space-x-2">
+              <span class="text-green-500">✓</span>
+              <span x-text="feature" class="text-gray-700"></span>
+            </li>
+          </template>
+        </ul>
+      </div>
+    </template>
+  </div>
+</div>

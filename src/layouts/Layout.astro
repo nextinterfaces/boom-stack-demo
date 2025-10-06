@@ -1,0 +1,70 @@
+---
+export interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="BOOM Stack Demo - Bun, Astro, MongoDB, HTMX, Alpine" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    
+    <!-- HTMX -->
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+    
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Custom styles -->
+    <style>
+      .htmx-request {
+        opacity: 0.5;
+      }
+      
+      .fade-in {
+        animation: fadeIn 0.3s ease-in;
+      }
+      
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      
+      .task-item {
+        transition: all 0.2s ease;
+      }
+      
+      .task-item:hover {
+        transform: translateX(4px);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+      <header class="mb-8">
+        <h1 class="text-4xl font-bold text-gray-800 mb-2">
+          <span class="text-primary-600">BOOM Stack</span> Demo
+        </h1>
+        <p class="text-gray-600">
+          Built with <strong>B</strong>un, Astr<strong>o</strong>, <strong>M</strong>ongoDB, HTM<strong>X</strong>, and Alpine.js
+        </p>
+      </header>
+      
+      <main>
+        <slot />
+      </main>
+      
+      <footer class="mt-16 pt-8 border-t border-gray-200">
+        <p class="text-gray-500 text-center">
+          BOOM Stack Demo &copy; 2024
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>

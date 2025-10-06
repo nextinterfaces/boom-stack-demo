@@ -1,0 +1,186 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TaskForm from '../components/TaskForm.astro';
+import TechStackInfo from '../components/TechStackInfo.astro';
+---
+
+<Layout title="BOOM Stack Demo">
+  <div class="space-y-8">
+    <!-- Hero Section -->
+    <div class="text-center py-12">
+      <h1 class="text-5xl font-bold text-gray-800 mb-4">
+        Welcome to the <span class="text-primary-600">BOOM</span> Stack!
+      </h1>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Experience the power of <strong>Bun</strong>, <strong>Astro</strong>, <strong>MongoDB</strong>, 
+        <strong>HTMX</strong>, and <strong>Alpine.js</strong> working together in perfect harmony.
+      </p>
+    </div>
+
+    <!-- Technology Overview -->
+    <TechStackInfo />
+
+    <!-- Live Demo Section -->
+    <div class="bg-gradient-to-r from-primary-50 to-blue-50 rounded-lg p-8">
+      <h2 class="text-3xl font-semibold text-gray-800 mb-4 text-center">
+        Interactive Task Manager Demo
+      </h2>
+      <p class="text-gray-600 text-center mb-8">
+        This demo showcases all BOOM stack technologies in action:
+      </p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+        <div class="text-center p-4 bg-white rounded-lg shadow">
+          <div class="text-2xl mb-2">🥖</div>
+          <div class="font-semibold text-sm">Bun Runtime</div>
+        </div>
+        <div class="text-center p-4 bg-white rounded-lg shadow">
+          <div class="text-2xl mb-2">🚀</div>
+          <div class="font-semibold text-sm">Astro Framework</div>
+        </div>
+        <div class="text-center p-4 bg-white rounded-lg shadow">
+          <div class="text-2xl mb-2">🍃</div>
+          <div class="font-semibold text-sm">MongoDB Database</div>
+        </div>
+        <div class="text-center p-4 bg-white rounded-lg shadow">
+          <div class="text-2xl mb-2">⚡</div>
+          <div class="font-semibold text-sm">HTMX Interactions</div>
+        </div>
+        <div class="text-center p-4 bg-white rounded-lg shadow">
+          <div class="text-2xl mb-2">🏔️</div>
+          <div class="font-semibold text-sm">Alpine.js Reactivity</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Task Management Demo -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-1">
+        <TaskForm />
+        
+        <!-- HTMX Demo Controls -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h3 class="text-lg font-semibold text-gray-800 mb-4">HTMX Demo Controls</h3>
+          <div class="space-y-3">
+            <button
+              hx-get="/api/tasks/html"
+              hx-target="#tasks-container"
+              class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md transition-colors"
+            >
+              🔄 Refresh Tasks (HTMX)
+            </button>
+            
+            <div 
+              x-data="{ count: 0 }"
+              class="p-4 bg-gray-50 rounded-md"
+            >
+              <p class="text-sm text-gray-600 mb-2">Alpine.js Counter Demo:</p>
+              <div class="flex items-center space-x-3">
+                <button @click="count--" class="px-3 py-1 bg-red-500 text-white rounded">-</button>
+                <span x-text="count" class="font-bold text-lg"></span>
+                <button @click="count++" class="px-3 py-1 bg-green-500 text-white rounded">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="lg:col-span-2">
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl font-semibold text-gray-800">Your Tasks</h2>
+            <div class="flex items-center space-x-2 text-sm text-gray-500">
+              <span class="inline-flex items-center">
+                <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
+                MongoDB Connected
+              </span>
+            </div>
+          </div>
+          
+          <!-- Tasks Container - Updated via HTMX -->
+          <div 
+            id="tasks-container"
+            hx-get="/api/tasks/html"
+            hx-trigger="load, refreshTasks from:body"
+            hx-indicator="#loading"
+            class="space-y-4 min-h-32"
+          >
+            <div id="loading" class="htmx-indicator flex items-center justify-center py-8">
+              <svg class="animate-spin h-8 w-8 text-primary-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features Showcase -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6">BOOM Stack Features in Action</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="border rounded-lg p-4">
+          <h3 class="font-semibold text-gray-800 mb-2">🥖 Bun Features</h3>
+          <ul class="text-sm text-gray-600 space-y-1">
+            <li>• Fast JavaScript runtime</li>
+            <li>• Built-in package manager</li>
+            <li>• Native TypeScript support</li>
+            <li>• Optimized bundling</li>
+          </ul>
+        </div>
+        
+        <div class="border rounded-lg p-4">
+          <h3 class="font-semibold text-gray-800 mb-2">🚀 Astro Features</h3>
+          <ul class="text-sm text-gray-600 space-y-1">
+            <li>• Zero JS by default</li>
+            <li>• Server-side rendering</li>
+            <li>• Component islands</li>
+            <li>• API routes</li>
+          </ul>
+        </div>
+        
+        <div class="border rounded-lg p-4">
+          <h3 class="font-semibold text-gray-800 mb-2">🍃 MongoDB Features</h3>
+          <ul class="text-sm text-gray-600 space-y-1">
+            <li>• Document storage</li>
+            <li>• Flexible schema</li>
+            <li>• CRUD operations</li>
+            <li>• Real-time updates</li>
+          </ul>
+        </div>
+        
+        <div class="border rounded-lg p-4">
+          <h3 class="font-semibold text-gray-800 mb-2">⚡ HTMX Features</h3>
+          <ul class="text-sm text-gray-600 space-y-1">
+            <li>• AJAX without JavaScript</li>
+            <li>• Progressive enhancement</li>
+            <li>• Partial page updates</li>
+            <li>• Server-driven UI</li>
+          </ul>
+        </div>
+        
+        <div class="border rounded-lg p-4">
+          <h3 class="font-semibold text-gray-800 mb-2">🏔️ Alpine.js Features</h3>
+          <ul class="text-sm text-gray-600 space-y-1">
+            <li>• Declarative reactivity</li>
+            <li>• Component state</li>
+            <li>• Event handling</li>
+            <li>• DOM manipulation</li>
+          </ul>
+        </div>
+        
+        <div class="border rounded-lg p-4">
+          <h3 class="font-semibold text-gray-800 mb-2">💎 Integration Benefits</h3>
+          <ul class="text-sm text-gray-600 space-y-1">
+            <li>• Fast development</li>
+            <li>• Minimal complexity</li>
+            <li>• Great performance</li>
+            <li>• Modern DX</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
